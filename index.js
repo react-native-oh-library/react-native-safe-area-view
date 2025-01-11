@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Dimensions,
   InteractionManager,
-  NativeModules,
   Platform,
   StyleSheet,
   Animated,
@@ -21,8 +20,7 @@ const PAD_HEIGHT = 1024;
 
 const { height: D_HEIGHT, width: D_WIDTH } = Dimensions.get('window');
 
-const { PlatformConstants = {} } = NativeModules;
-const { minor = 0 } = PlatformConstants.reactNativeVersion || {};
+const { minor = 0 } = {};
 
 const isIPhoneX = (() => {
   if (Platform.OS === 'web') return false;
@@ -155,7 +153,7 @@ class SafeView extends Component {
     const WIDTH = isLandscape ? X_HEIGHT : X_WIDTH;
     const HEIGHT = isLandscape ? X_WIDTH : X_HEIGHT;
 
-    this.view._component.measureInWindow((winX, winY, winWidth, winHeight) => {
+    this.view._component.measureInWindow?.((winX, winY, winWidth, winHeight) => {
       if (!this.view) {
         return;
       }
